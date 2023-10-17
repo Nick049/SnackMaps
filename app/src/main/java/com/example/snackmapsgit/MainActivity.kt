@@ -1,5 +1,6 @@
 package com.example.snackmapsgit
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +15,7 @@ import com.example.snackmapsgit.ui.theme.SnackMapsGitTheme
 import java.util.*;
 
 class MainActivity : ComponentActivity() {
+    var test: String = "start";
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -23,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting(test,this)
                 }
             }
         }
@@ -31,9 +33,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(name: String, activity: MainActivity, modifier: Modifier = Modifier) {
+    var webScrape = WebScraping();
     Text(
-        text = "Hello $name!" + WebScraping.getScrape("https://kotlinlang.org/docs/java-interop.html#getters-and-setters"),
+        text = "Hello $name!" + webScrape.getScrapeInBackground("https://www.walmart.com/ip/Doritos-Nacho-Cheese-Tortilla-Snack-Chips-Party-Size-14-5-oz-Bag/433078517?from=/search", activity),
         modifier = modifier
     )
 }
@@ -42,6 +45,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     SnackMapsGitTheme {
-        Greeting("Android")
+        //Greeting("Android")
     }
 }
