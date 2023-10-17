@@ -1,19 +1,22 @@
 package com.example.snackmapsgit;
 
-import android.app.Activity;
-import android.os.AsyncTask;
-
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.*;
 
 public class WebScraping {
+
+    static List<String> prices = new ArrayList<>();
+    static List<String> products = new ArrayList<>();
+
     class Price{
-        public volatile Double price = 0.0;
+        public volatile String price = "";
     }
     final Price itemPrice = new Price();
     final
@@ -33,20 +36,17 @@ public class WebScraping {
     }
 
 
-    protected Double getScrapeInBackground(String url, MainActivity activity) {
+    protected String scrapeWalmart(String url, MainActivity activity) {
         Thread thread = new Thread(() -> {
                 // do background stuff here
                 Document doc = getScrape(url);
-                Elements elements = doc != null ? doc.getElementsByClass("inline-flex flex-column") : null;
-                String get = elements.get(0).attr("text");
+                getPrice(doc);
                 activity.runOnUiThread(() -> {
                     // OnPostExecute stuff here
-                    System.out.println("test2");
                 });
 
         });
         thread.start();
-        activity.setTest("test3");
         try {
             thread.join();
         } catch (InterruptedException e) {
@@ -54,7 +54,9 @@ public class WebScraping {
         }
         return itemPrice.price;
     }
-
-
-
+    public void getPrice(Document doc){
+        Elements elements = doc != null ? doc.getElementsByClass("inline-flex flex-column") : null;
+        Node priceNode = elements.get(0).childNode(0).childNode(0);
+        prices.add(((TextNode) priceNode).text());
+    }
 }

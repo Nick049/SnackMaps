@@ -1,6 +1,5 @@
 package com.example.snackmapsgit
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,9 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.snackmapsgit.ui.theme.SnackMapsGitTheme
-import java.util.*;
 
 class MainActivity : ComponentActivity() {
     var test: String = "start";
@@ -36,7 +33,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, activity: MainActivity, modifier: Modifier = Modifier) {
     var webScrape = WebScraping();
     Text(
-        text = "Hello $name!" + webScrape.getScrapeInBackground("https://www.walmart.com/ip/Doritos-Nacho-Cheese-Tortilla-Snack-Chips-Party-Size-14-5-oz-Bag/433078517?from=/search", activity),
+        text = webScrape.scrapeWalmart("https://www.walmart.com/ip/Great-Value-Small-Fajita-Flour-Tortillas-26-oz-20-Count/478147915?from=/search", activity),
         modifier = modifier
     )
 }
