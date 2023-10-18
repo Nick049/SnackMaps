@@ -38,6 +38,11 @@ fun Greeting(name: String, activity: MainActivity, modifier: Modifier = Modifier
     )
 }
 
+fun Text(text: List<String>, modifier: Modifier) {
+
+}
+
+
 //@Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
