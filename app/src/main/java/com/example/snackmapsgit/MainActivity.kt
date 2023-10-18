@@ -1,6 +1,7 @@
 package com.example.snackmapsgit
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -83,31 +84,10 @@ fun ProductPlacer(product: String, type: String, location: String, address: Stri
         )
         //created space between image and text
         Spacer(modifier = Modifier.width(10.dp))
-        Column {
+        Column{
             Text("$product")
             Text("$type")
             Text("$location")
-            Text( "$address")
-        }
-    }
-
-
-}
-@Composable
-fun ListPlacer(data: List<Data>) {
-    Row (modifier = Modifier.padding(all = 8.dp)){
-        Image(
-            //prints image file in drawables
-            painter = painterResource(R.drawable.doritos),
-            contentDescription = "doritos",
-            modifier = Modifier
-                //sets image size
-                .size(150.dp)
-        )
-        //created space between image and text
-        Spacer(modifier = Modifier.width(10.dp))
-        LazyColumn {
-           items(data)
         }
     }
 

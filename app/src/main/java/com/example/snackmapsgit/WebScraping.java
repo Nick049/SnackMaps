@@ -12,7 +12,7 @@ import java.util.*;
 
 public class WebScraping {
 
-    static List<String> data = new ArrayList<>();
+    static List<String> Data = new ArrayList<>();
 
     class Price{
         public volatile String price = "";
@@ -52,16 +52,16 @@ public class WebScraping {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return data;
+        return Data;
     }
     public void getPriceWalmart(Document doc){
         Elements priceElement = doc != null ? doc.getElementsByClass("inline-flex flex-column") : null;
         Node priceNode = priceElement.get(0).childNode(0).childNode(0);
-        data.add(((TextNode) priceNode).text());
+        Data.add(((TextNode) priceNode).text());
     }
     public void getProductWalmart(Document doc){
         Elements productElement = doc != null ? doc.getElementsByClass("lh-copy dark-gray mv1 f3 mh0-l mh3 b") : null;
         Node productNode = productElement.get(0).childNode(0);
-        data.add(((TextNode) productNode).text());
+        Data.add(((TextNode) productNode).text());
     }
 }
