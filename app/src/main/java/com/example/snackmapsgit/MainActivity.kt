@@ -3,6 +3,8 @@ package com.example.snackmapsgit
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -10,6 +12,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.snackmapsgit.ui.theme.SnackMapsGitTheme
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+
 
 class MainActivity : ComponentActivity() {
     var test: String = "start";
@@ -21,32 +39,77 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting(test,this)
-                }
+                ) {}
+                TestText()
+                TestText()
+                ProductPlacer(product = "bob", type = "test", location = "target", address = "517 lane")
+
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, activity: MainActivity, modifier: Modifier = Modifier) {
-    var webScrape = WebScraping();
-    Text(
-        text = webScrape.scrapeWalmart("https://www.walmart.com/ip/Great-Value-Small-Fajita-Flour-Tortillas-26-oz-20-Count/478147915?from=/search", activity),
-        modifier = modifier
-    )
-}
-
-fun Text(text: List<String>, modifier: Modifier) {
-
-}
-
-
-//@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SnackMapsGitTheme {
-        //Greeting("Android")
+fun TestText() {
+    Row (modifier = Modifier.padding(all = 8.dp)){
+        Image(
+            //prints image file in drawables
+            painter = painterResource(R.drawable.doritos),
+            contentDescription = "doritos",
+            modifier = Modifier
+            //sets image size
+            .size(150.dp)
+        )
+        //created space between image and text
+        Spacer(modifier = Modifier.width(10.dp))
+        Column {
+            Text("Doritos")
+            Text("Nacho Cheese")
+            Text("Location: walmart")
+        }
     }
+}
+
+@Composable
+fun ProductPlacer(product: String, type: String, location: String, address: String) {
+    Row (modifier = Modifier.padding(all = 8.dp)){
+        Image(
+            //prints image file in drawables
+            painter = painterResource(R.drawable.doritos),
+            contentDescription = "doritos",
+            modifier = Modifier
+                //sets image size
+                .size(150.dp)
+        )
+        //created space between image and text
+        Spacer(modifier = Modifier.width(10.dp))
+        Column {
+            Text("$product")
+            Text("$type")
+            Text("$location")
+            Text( "$address")
+        }
+    }
+
+
+}
+@Composable
+fun ListPlacer(data: List<Data>) {
+    Row (modifier = Modifier.padding(all = 8.dp)){
+        Image(
+            //prints image file in drawables
+            painter = painterResource(R.drawable.doritos),
+            contentDescription = "doritos",
+            modifier = Modifier
+                //sets image size
+                .size(150.dp)
+        )
+        //created space between image and text
+        Spacer(modifier = Modifier.width(10.dp))
+        LazyColumn {
+           items(data)
+        }
+    }
+
+
 }
