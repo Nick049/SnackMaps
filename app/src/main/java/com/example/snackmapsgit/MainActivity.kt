@@ -26,6 +26,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +42,7 @@ class MainActivity : ComponentActivity() {
                 ) {}
                 TestText()
                 TestText()
+                ProductPlacer(product = "bob", type = "test", location = "target", address = "517 lane")
             }
         }
     }
@@ -83,6 +87,26 @@ fun ProductPlacer(product: String, type: String, location: String, address: Stri
             Text("$type")
             Text("$location")
             Text( "$address")
+        }
+    }
+
+
+}
+@Composable
+fun ListPlacer(data: List<Data>) {
+    Row (modifier = Modifier.padding(all = 8.dp)){
+        Image(
+            //prints image file in drawables
+            painter = painterResource(R.drawable.doritos),
+            contentDescription = "doritos",
+            modifier = Modifier
+                //sets image size
+                .size(150.dp)
+        )
+        //created space between image and text
+        Spacer(modifier = Modifier.width(10.dp))
+        LazyColumn {
+           items(data)
         }
     }
 
