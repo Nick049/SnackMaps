@@ -11,7 +11,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.snackmapsgit.ui.theme.SnackMapsGitTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
@@ -31,6 +30,7 @@ import androidx.compose.foundation.lazy.items
 
 
 class MainActivity : ComponentActivity() {
+    var test: String = "start";
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
                 TestText()
                 TestText()
                 ProductPlacer(product = "bob", type = "test", location = "target", address = "517 lane")
+
             }
         }
     }
