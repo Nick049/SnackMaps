@@ -33,9 +33,11 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, activity: MainActivity, modifier: Modifier = Modifier) {
     var webScrape = WebScraping();
     Text(
-        text = webScrape.scrapeWalmart("https://www.walmart.com/ip/Great-Value-Small-Fajita-Flour-Tortillas-26-oz-20-Count/478147915?from=/search", activity),
+        //text = webScrape.scrapeWalmart("https://www.walmart.com/store-finder?location=48854", activity),
+        text = webScrape.scrapeWalmart("https://www.walmart.com/search?q=tortillas&typeahead=tort", activity),
         modifier = modifier
     )
+
 }
 
 fun Text(text: List<String>, modifier: Modifier) {
