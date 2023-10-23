@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SnackMapsGit"
         tools:targetApi="31">
+        <activity
+            android:name=".titleAndSearchBar"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/search configutation" />

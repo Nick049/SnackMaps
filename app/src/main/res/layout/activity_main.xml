@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:paddingTop="?android:attr/actionBarSize"
-    android:visibility="visible">
+    tools:context=".MainActivity2">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"

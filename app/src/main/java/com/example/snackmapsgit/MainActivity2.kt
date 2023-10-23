@@ -34,20 +34,5 @@ class MainActivity2 : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    override fun onCreateInputView(): View {
-        return layoutInflater.inflate(R.layout.input, null).apply {
-            if (this is MyKeyboardView) {
-                setOnKeyboardActionListener(this@MyInputMethod)
-                keyboard = latinKeyboard
-            }
-        }
-    }
-
-    private fun setOnKeyboardActionListener(any: Any) {
-
-    }
-}
-
-class MyKeyboardView {
 
 }
