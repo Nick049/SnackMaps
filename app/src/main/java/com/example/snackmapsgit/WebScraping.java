@@ -39,9 +39,14 @@ public class WebScraping {
     protected List<String> scrapeWalmart(String url, MainActivity activity) {
         Thread thread = new Thread(() -> {
                 // do background stuff here
-                Document doc = getScrape(url);
-                getPriceWalmartPage(doc);
-                getProdectWalmartPage(doc);
+            Document doc = null;
+            try {
+                doc = getSearchWalmart("tortillas");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            getPriceWalmartPage(doc);
+            getProdectWalmartPage(doc);
 
                 /**getPriceWalmart(doc);
                 getProductWalmart(doc);
@@ -60,19 +65,33 @@ public class WebScraping {
         return priceList;
     }
 
+
+    public Document getSearchWalmart(String search) throws IOException{
+        search = "tortillas";  // placeholder
+        String urlSet = "";
+        urlSet = "https://www.walmart.com/search?q=" + search;
+
+
+        Document doc = Jsoup.connect(urlSet).userAgent("Mozilla/5.0").get();
+        return doc;
+    }
     public void getPriceWalmartPage(Document doc){
-        Elements urlElement = doc != null ? doc.getElementsByClass("mr1 mr2-xl b black lh-copy f5 f4-l") : null;
-        Node priceNodeDolar = urlElement.get(0).childNode(2).childNode(0);
-        Node priceNodeCent = urlElement.get(0).childNode(3).childNode(0);
-        String price = ((TextNode)priceNodeDolar).text() + ((TextNode)priceNodeCent).text();
+        Elements urlElement = doc != null ? doc.getElementsByClass("flex flex-wrap justify-start items-center lh-title mb1") : null;
+        Node priceNodeDolar = urlElement.get(0).childNode(1).childNode(0);  // gets the $ amount// gets the cents
+        String price = ((TextNode)priceNodeDolar).text();
         priceList.add(price);
     }
     public void getProdectWalmartPage(Document doc){
         Elements urlElement = doc != null ? doc.getElementsByClass("w_V_DM") : null;
-        Node priceNodeDolar = urlElement.get(0).childNode(2).childNode(0);
+        Node priceNodeDolar = urlElement.get(0).childNode(0).childNode(0);
         String price = ((TextNode)priceNodeDolar).text();
         productList.add(price);
     }
+
+
+
+
+
     public void getPriceWalmart(Document doc){
         Elements productElement = doc != null ? doc.getElementsByClass("inline-flex flex-column") : null;
         Node productNode = productElement.get(0).childNode(0).childNode(0);

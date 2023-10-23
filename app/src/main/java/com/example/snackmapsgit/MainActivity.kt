@@ -34,7 +34,7 @@ fun Greeting(name: String, activity: MainActivity, modifier: Modifier = Modifier
     var webScrape = WebScraping();
     Text(
         //text = webScrape.scrapeWalmart("https://www.walmart.com/store-finder?location=48854", activity),
-        text = webScrape.scrapeWalmart("https://www.walmart.com/search?q=tortillas&typeahead=tort", activity),
+        text = webScrape.scrapeWalmart("https://www.walmart.com/search?q=tortillas", activity),
         modifier = modifier
     )
 
