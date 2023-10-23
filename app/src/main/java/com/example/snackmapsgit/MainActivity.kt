@@ -31,7 +31,6 @@ import androidx.compose.foundation.lazy.items
 
 
 class MainActivity : ComponentActivity() {
-    var test: String = "start";
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -41,9 +40,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {}
-                TestText()
-                TestText()
-                ProductPlacer(product = "bob", type = "test", location = "target", address = "517 lane")
+                ListOfEntires()
 
             }
         }
@@ -51,29 +48,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TestText() {
-    Row (modifier = Modifier.padding(all = 8.dp)){
-        Image(
-            //prints image file in drawables
-            painter = painterResource(R.drawable.doritos),
-            contentDescription = "doritos",
-            modifier = Modifier
-            //sets image size
-            .size(150.dp)
-        )
-        //created space between image and text
-        Spacer(modifier = Modifier.width(10.dp))
-        Column {
-            Text("Doritos")
-            Text("Nacho Cheese")
-            Text("Location: walmart")
-        }
-    }
+fun ListOfEntires(){
+    TestText()
 }
 
 @Composable
-fun ProductPlacer(product: String, type: String, location: String, address: String) {
-    Row (modifier = Modifier.padding(all = 8.dp)){
+fun TestText() {
+    Column {
+    Row(modifier = Modifier.padding(all = 8.dp)) {
         Image(
             //prints image file in drawables
             painter = painterResource(R.drawable.doritos),
@@ -84,12 +66,92 @@ fun ProductPlacer(product: String, type: String, location: String, address: Stri
         )
         //created space between image and text
         Spacer(modifier = Modifier.width(10.dp))
-        Column{
-            Text("$product")
-            Text("$type")
-            Text("$location")
+        Column {
+            Text("Product: Doritos")
+            Text("Price: irrelevant")
+            Text("Location: walmart")
+        }
+    }
+    Row(modifier = Modifier.padding(all = 8.dp)) {
+        Image(
+            //prints image file in drawables
+            painter = painterResource(R.drawable.lalatortillas),
+            contentDescription = "LaLa's Tortillas",
+            modifier = Modifier
+                //sets image size
+                .size(150.dp)
+        )
+        //created space between image and text
+        Spacer(modifier = Modifier.width(10.dp))
+        Column {
+            Text("Product: LaLa's tortillas")
+            Text("Price: irrelevant")
+            Text("Location: walmart")
+        }
+    }
+        Row(modifier = Modifier.padding(all = 8.dp)) {
+            Image(
+                //prints image file in drawables
+                painter = painterResource(R.drawable.missiontortillas10big),
+                contentDescription = "Mission Tortillas",
+                modifier = Modifier
+                    //sets image size
+                    .size(150.dp)
+            )
+            //created space between image and text
+            Spacer(modifier = Modifier.width(10.dp))
+            Column {
+                Text("Product: Mission tortillas")
+                Text("Price: irrelevant")
+                Text("Location: Walmart")
+            }
+        }
+        Row(modifier = Modifier.padding(all = 8.dp)) {
+            Image(
+                //prints image file in drawables
+                painter = painterResource(R.drawable.tortillas26oz),
+                contentDescription = "Tortillas",
+                modifier = Modifier
+                    //sets image size
+                    .size(150.dp)
+            )
+            //created space between image and text
+            Spacer(modifier = Modifier.width(10.dp))
+            Column {
+                Text("Product: Great Value Tortillas")
+                Text("Price: irrelevant")
+                Text("Location: Walmart")
+            }
+        }
+
+}
+}
+
+
+
+@Composable
+fun ProductPlacer(product: String, type: String, location: String, address: String) {
+    Column {
+        Row (modifier = Modifier.padding(all = 8.dp)){
+            Image(
+                //prints image file in drawables
+                painter = painterResource(R.drawable.doritos),
+                contentDescription = "doritos",
+                modifier = Modifier
+                    //sets image size
+                    .size(150.dp)
+            )
+            //created space between image and text
+            Spacer(modifier = Modifier.width(10.dp))
+            Column{
+                Text("$product")
+                Text("$type")
+                Text("$location")
+            }
         }
     }
 
 
+
 }
+
