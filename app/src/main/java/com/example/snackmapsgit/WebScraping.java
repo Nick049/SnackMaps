@@ -1,5 +1,7 @@
 package com.example.snackmapsgit;
 
+import android.media.Image;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,13 +14,15 @@ import java.util.*;
 
 public class WebScraping {
 
-    static List<String> priceList = new ArrayList<>();
-    static List<String> productList = new ArrayList<>();
+    public static List<String> priceList = new ArrayList<>();
+    public static List<String> productList = new ArrayList<>();
 
-    class Price{
+    class Price {
         public volatile String price = "";
     }
+
     final Price itemPrice = new Price();
+
     final
     public Document getScrape(String url) {
         Connection connection = Jsoup.connect(url);
@@ -27,18 +31,17 @@ public class WebScraping {
             return document;
 
             // how to get information from a document
-        }
-        catch (IOException ex){
+        } catch (IOException ex) {
         }
 
 
-       return null;
+        return null;
     }
 
 
     protected List<String> scrapeWalmart(String url, MainActivity activity) {
         Thread thread = new Thread(() -> {
-                // do background stuff here
+            // do background stuff here
             Document doc = null;
             try {
                 doc = getSearchWalmart("tortillas");
@@ -48,12 +51,12 @@ public class WebScraping {
             getPriceWalmartPage(doc);
             getProdectWalmartPage(doc);
 
-                /**getPriceWalmart(doc);
-                getProductWalmart(doc);
-                getLocationWalmart(doc); **/
-                activity.runOnUiThread(() -> {
-                    // OnPostExecute stuff here
-                });
+            /**getPriceWalmart(doc);
+             getProductWalmart(doc);
+             getLocationWalmart(doc); **/
+            activity.runOnUiThread(() -> {
+                // OnPostExecute stuff here
+            });
 
         });
         thread.start();
@@ -66,7 +69,7 @@ public class WebScraping {
     }
 
 
-    public Document getSearchWalmart(String search) throws IOException{
+    public Document getSearchWalmart(String search) throws IOException {
         search = "tortillas";  // placeholder
         String urlSet = "";
         urlSet = "https://www.walmart.com/search?q=" + search;
@@ -75,36 +78,18 @@ public class WebScraping {
         Document doc = Jsoup.connect(urlSet).userAgent("Mozilla/5.0").get();
         return doc;
     }
-    public void getPriceWalmartPage(Document doc){
+
+    public void getPriceWalmartPage(Document doc) {
         Elements urlElement = doc != null ? doc.getElementsByClass("flex flex-wrap justify-start items-center lh-title mb1") : null;
         Node priceNodeDolar = urlElement.get(0).childNode(1).childNode(0);  // gets the $ amount// gets the cents
-        String price = ((TextNode)priceNodeDolar).text();
+        String price = ((TextNode) priceNodeDolar).text();
         priceList.add(price);
     }
-    public void getProdectWalmartPage(Document doc){
+
+    public void getProdectWalmartPage(Document doc) {
         Elements urlElement = doc != null ? doc.getElementsByClass("w_V_DM") : null;
         Node priceNodeDolar = urlElement.get(0).childNode(0).childNode(0);
-        String price = ((TextNode)priceNodeDolar).text();
+        String price = ((TextNode) priceNodeDolar).text();
         productList.add(price);
-    }
-
-
-
-
-
-    public void getPriceWalmart(Document doc){
-        Elements productElement = doc != null ? doc.getElementsByClass("inline-flex flex-column") : null;
-        Node productNode = productElement.get(0).childNode(0).childNode(0);
-        productList.add(((TextNode) productNode).text());
-    }
-    public void getProductWalmart(Document doc){
-        Elements productElement = doc != null ? doc.getElementsByClass("lh-copy dark-gray mv1 f3 mh0-l mh3 b") : null;
-        Node productNode = productElement.get(0).childNode(0);
-        priceList.add(((TextNode) productNode).text());
-    }
-    public void getLocationWalmart(Document doc){
-        Elements locationElement = doc != null ? doc.getElementsByClass("mw-none-m mh2-m truncate") : null;
-        Node productNode = locationElement.get(0).childNode(0);
-        priceList.add(((TextNode) productNode).text());
     }
 }
